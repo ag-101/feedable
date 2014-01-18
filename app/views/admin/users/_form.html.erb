@@ -1,0 +1,40 @@
+<div class="field control-group">
+   <%= f.label :username, "Username", :class => 'control-label' %>
+  <div class="input controls">
+    <%= f.text_field :username, :class => 'text_field', :autocomplete =>"off" %>
+  </div>
+</div>
+
+<div class="field control-group">
+   <%= f.label :email, "Email", :class => 'control-label' %>
+  <div class="input controls">
+    <%= f.text_field :email, :class => 'text_field', :autocomplete =>"off" %>
+  </div>
+</div>
+
+<div class="field control-group">
+   <%= f.label :password, "Password", :class => 'control-label' %>
+  <div class="input controls">
+    <%= f.password_field :password, :class => 'password_field', :autocomplete =>"off"  %>
+  </div>
+</div>
+<div class="field control-group">
+   <%= f.label :Password, "Password confirmation", :class => 'control-label' %>
+  <div class="input controls">
+    <%= f.password_field :password_confirmation, :class => 'password_field', :autocomplete =>"off"  %>
+  </div>
+</div>
+
+<div class="field controls">
+	<% for role in Role.find(:all) %> 
+	  <div class ="control-group field  checkbox controls">
+	   	<%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %> 
+	   	<%= f.label role.name , :class => 'checkbox' %>
+	  </div>
+	<% end %>
+</div>
+
+<div class="field controls">
+  <button class="btn btn-primary" type="submit">Save</button>
+</div>
+	<%= link_to "Cancel", admin_users_path %>

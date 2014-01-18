@@ -1,0 +1,17 @@
+<div class="row-fluid" id="main_container">
+	<%= render :partial => 'subscriptions' unless @subscriptions.count == 0  %>
+	
+	
+	<div class="span9 feed_loader" id="feed_content_container">
+		<h3>Trending in the last <%= time_ago_in_words(@since) %></h3>
+		<blockquote>This page displays every word used in a title in the most recent items in your subscriptions after filtering out common words.  
+		The larger the word, the more times it has been used.
+		<small>Common words ignored: <%= @blacklist.join(', ') %>.</small></blockquote>
+		
+		<div class="well">
+		<% @tags.each do |t| %>
+		 	<span class="feed_tag<%= (@counts[t.downcase].to_f/@counts.values.max * 5).to_i %>"><%= t -%></span>
+		<% end %>
+		</div>
+	</div>
+</div>

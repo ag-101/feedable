@@ -1,0 +1,57 @@
+<div class="row-fluid" id="main_container">
+	<div class="span3">
+		<h3>Subscriptions</h3>
+		<div class="padded">Edit your subscriptions from the library.</div>
+	</div>
+	<div  id="library" class="span9 feed_loader">
+		<h3>Library</h3>
+
+		<%= link_to "New Category", new_feed_category_path, :class=>"block btn  btn-success #{loader_type}" if @admin %>
+		<%= link_to "<i class='icon-plus-sign'> </i> New Feed".html_safe, new_feed_path, :class=>"block btn btn-primary #{loader_type}"%>
+		
+		<% if @subscriptions.count == 0 %>
+			<div class="no_subscriptions_message">
+				Select a category below to expand it, then click a feed to add it to your subscriptions.
+			</div>
+		<% end %>
+		
+		<div>
+			
+			<% current_category = 0
+				count = -1
+			 %>
+
+			<% @available_feeds.each_with_index do |feed, index| %>
+
+				<% display_category = false 
+				
+				   if feed.feed_category != current_category
+					  display_category = true
+					  current_category = feed.feed_category
+					  count = count + 1
+				   end
+				%>
+
+				<% if display_category %>
+					<% if index > 0 %>
+							</div>
+						</div>
+					<% end %>	
+				
+					<% if count % 3 == 0 %></div><div class="row-fluid margin-bottom"><% end %>
+	
+					<div class="feed_category span4">
+						<div class="feed_category_title" style="background-color:<%= feed.feed_category.colour%>"><%= feed.feed_category.name %></div>
+						<div class="category_feeds">
+				<% end %>		
+						
+					<div id="feed_container_<%= feed.id %>" class="feed_container">
+						<%= render :partial=>'feed', :locals => {:feed => feed }%>
+					</div>
+			<% end %>
+			
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>

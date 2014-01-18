@@ -1,0 +1,7 @@
+<%= pluralize(@new_items, 'new items')%> parsed
+
+<%= @feeds_to_update.map(&:name).join(", ") %>
+
+<%= pluralize(@deleted.count, 'items') %> deleted
+
+http://feedable.co.uk/feeds

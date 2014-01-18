@@ -1,0 +1,8 @@
+<div class="row-fluid"  id="main_container">
+	<%= render :partial => 'subscriptions' unless @subscriptions.count == 0  %>
+	
+	<div class="span9 feed_loader" id="feed_content_container">
+		<% @no_more = true %>
+		<%= render :partial => 'feed_content' %>
+	</div>
+</div>

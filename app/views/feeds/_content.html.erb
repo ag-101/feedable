@@ -1,0 +1,146 @@
+<div class="row-fluid feed_contents_container">
+	<% 
+		row_index = 0
+		row_type = rand(4)
+		first_read = false
+		last_time_ago = ""
+	 %>
+	 
+
+	<% @feed_content.each_with_index do |item, index| %>		
+		<% item = item.feed_content if @saved_items or @history %>
+	
+		<% article_type = item.feed.feed_type %>
+		<% 
+			doc = Nokogiri::HTML(sanitize(item.description, :tags=>['img', 'p', 'br', 'embed']))
+			images = doc.css('img').select{ |i| i['src'] }
+						
+			images.reject!{ |image| image["width"] == "1" or image["height"] == "1" or image["src"].include? '/comments/' or image["src"].include? '/feeds.feedburner.com/' or image["src"].include? '/social/' or image["src"].ends_with? ".img"}
+			
+			read = false
+			read = true if @user and @user.last_visit and (@user.last_visit > item.created_at)
+			
+		 %>
+
+		 <% if read and !first_read
+				first_read = true
+		 		if index != 0 %>
+			 		<div class="read_line">You have read to this point</div>
+		 		<% end %>
+		 <% end %>
+		 		 
+
+		<div class="span4 row_type_<%= row_type %> row_index_<%= row_index %> feed_content_container content_<%= item.feed.id %> <%= article_type %><%= ' read' if read %>" style="background-color:<%= item.feed.feed_category.colour %>">	
+			<div class="title_item" style="border-color:<%= item.feed.feed_category.colour %>"><%= item.title %></div>		
+			<div class="grid_item <%= 'full-image' if images.count > 0 %> feed_content_fixed_height feed_content"  style="border-color:<%= item.feed.feed_category.colour %><%= "; background-image:url('#{ images.first["src"] }')" if images.count > 0%>">
+				<div class="feed_content_title" style="color:<%= item.feed.feed_category.colour %>"><%= item.title %></div>
+				<div class="feed_content_description">
+					
+					<% if article_type == "podcast" %>
+						<audio controls preload="none">
+						  <source src="<%= item.url %>" type="audio/mpeg">
+							Your browser does not support the audio element.
+						</audio>
+						
+						<br/>
+					<% end %>
+
+					<% doc = Nokogiri::HTML(sanitize(item.description, :tags=>['img', 'p', 'br', 'embed']))
+					
+						doc.search("//*[@*[contains(.,'feedsportal.com')]]").remove
+						doc.search("//*[@*[contains(.,'feeds.feedburner.com')]]").remove
+						doc.search("img[@height = '1']").remove
+						doc.search("img[width = '1']").remove
+
+					 %>
+					
+					<%= doc.to_xml.html_safe %>
+				</div>
+			</div>
+			<div class="feed_details_container">
+				<div class="feed_details" style="background-color:<%= item.feed.feed_category.colour %>">
+					<div class="details_content">
+						
+						<% if article_type == "podcast" %>
+							<%= link_to "Download", feed_content_redirect_path(item), :target=>'_blank', :class=>"btn btn-small #{'btn-inverse' if read} article_link podcast_link" %>
+						<% else %>
+							<%
+							
+							additional_class = ""
+							clicked_info = ""
+							
+							if @user
+								if item.feed_content_redirect.any?{|redirect| redirect.user_id == current_user.id}
+									additional_class = "btn-success"
+									clicked_info = "#{ time_ago_in_words(item.feed_content_redirect.first.created_at) } ago"
+								else
+									if read
+										additional_class = "btn-inverse"
+									end
+								end
+							end
+								
+							%>
+						
+							<%= link_to "Read #{ clicked_info}", feed_content_redirect_path(item), :target=>'_blank', :class=>"btn btn-small #{ additional_class } article_link" %>
+						<% end %>
+					
+						<% if @user %>
+							<%= link_to "<i class='icon-star'> </i>".html_safe, feed_content_save_path(item), :class=>"save btn btn-small#{ " btn-warning" if item.feed_content_user.any?{|saved| saved.user_id == current_user.id}}" %>
+						<% end %>
+						<div class="item_feed_name"><%= item.feed.name %></div>
+						<div class="specific_details"><%= time_ago_in_words(item.pub_date) %> ago 
+							<span class="visible-desktop"><strong><%= item.feed.feed_category.name %></strong> |&nbsp;</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<% 
+		row_index = row_index + 1
+		if index % 3 == 2 
+			row_index = 0
+			new_row_type = rand(4)
+			if new_row_type != row_type
+				row_type = new_row_type
+			 else
+				row_type = rand(4)
+			end
+		%>
+		</div>
+		
+		<% if last_time_ago != time_ago_in_words(item.pub_date) %>
+			<% last_time_ago = time_ago_in_words(item.pub_date) %>
+		   <div class="time_ago"><%= time_ago_in_words(item.pub_date).humanize %> ago</div>
+		<% end %>
+		
+		
+		<div class="row-fluid feed_contents_container">
+		<% end %>
+	<% end %>
+</div>
+
+<% if @user %>
+	<div class="feed_pagination">
+		<% if @feed_content.count > 0 %>
+			<% if @loading_more %>
+				<%= link_to "Load more", feeds_more_path+"?page=#{(@page.to_i+1).to_s}", :class=>'btn block load_more' %>	
+			<% else %>	
+				<% unless (@no_more or @feed_content.count < 30) %>
+						<div class="visible-desktop">
+							<%= link_to "Load more", feeds_more_path+"?page=#{(@page.to_i+1).to_s}", :class=>'btn block load_more' %>	
+						</div>
+						<div class="hidden-desktop">
+							<%= paginate @feed_content, :window => 1 %>
+							<%= link_to "Auto load", '#', :class=>'enable_autoload btn' %>
+						</div>
+				<% else %>
+						<%= paginate @feed_content, :window => 1 unless @no_pagination %>	
+				<% end %>
+			<% end %>
+		<% else %>
+			<% # End of new articles %>
+		<% end %>
+	</div>
+<% end %>

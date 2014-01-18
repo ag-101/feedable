@@ -1,0 +1,2 @@
+module FeedContentHelper
+end

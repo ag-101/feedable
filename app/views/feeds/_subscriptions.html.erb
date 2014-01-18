@@ -1,0 +1,44 @@
+<% unless @hide_subscriptions_container %><div class="span3" id="subscriptions_container"><% end %>
+	<div id="subscriptions_static">	
+		<div id="subscriptions">
+			<h3>Subscriptions</h3>
+						
+			<%= link_to "<i class='icon-chevron-left'></i> Close".html_safe, '#', :id=>'close_subscriptions', :class=>'toggle_subscriptions btn visible-phone'%>
+			
+			<% current_category = "" %>
+		
+			<% @subscriptions.each_with_index do |sub, index| %>
+				<% if current_category != sub.feed_category.id
+					current_category = sub.feed_category_id %>
+				
+				<% if index > 0 %>
+					</ul>
+				</div>
+				<% end %>	
+						
+				<div class="feed_category">
+					
+						<%= link_to "#{sub.feed_category.name}", feeds_path+"?cat=#{sub.feed_category.id}", :class=>'feed_load feed_category_title block', :style=>"background-color: #{sub.feed_category.colour}" %>
+					<ul class="category_feeds">
+						<li><%= link_to sub.name, feed_path(sub.id), :id=>"subscribed_#{sub.id}", :style=>"color: #{sub.feed_category.colour}", :class=>'feed_load individual_feed'%></li>
+				<% else %>
+					<li><%= link_to sub.name, feed_path(sub.id), :id=>"subscribed_#{sub.id}", :style=>"color: #{sub.feed_category.colour}", :class=>'feed_load individual_feed'%></li>
+				<% end %>
+				
+			<% end %>
+			
+		
+			
+			<% if @subscriptions.count > 0 %>
+			
+					</ul>
+				</div>
+			<% end %>
+			<div id="messages_container">
+							<% if @subscriptions.count == 0 %>
+				<p>You're not subscribed to any feeds.</p>
+			<% end %>
+				<% if @user.last_visit %><div class="padded"><strong><%= pluralize(@count.count, 'new items') %></strong> since your last visit <strong><%= time_ago_in_words(@user.last_visit) %> ago</strong></div><% end %></div>
+		</div>
+	</div>
+<% unless @hide_subscriptions_container %></div><% end %>

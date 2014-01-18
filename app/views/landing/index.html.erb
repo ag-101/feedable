@@ -1,0 +1,38 @@
+<div id="landing">
+	<h2>Welcome to Feedable</h2>
+	<% if user_signed_in? %>
+	<p>Your account is awaiting activation from the administrator.  You'll be notified when this has been completed.</p>
+	<% else %>
+	
+	<p>This site lets you view news the way you want it.</p>
+	
+	<p>You need to <%= link_to('sign in', user_session_path, :class=>"#{loader_type}") %>   or <%= link_to('register', new_user_registration_path, :class=>"#{loader_type}" )%>   and await activation before you can fully access and customise this site.</p>
+	
+	<% end %>
+	
+	<p>Until then, enjoy a preview of content from all feeds that users haven't marked as private.</p>
+</div>
+
+<div class="row-fluid" id="main_container">
+	
+	<div class="span3 hidden-phone" id="left_column">
+		<h3>Trending</h3>
+		<blockquote class="home_blockquote">This section displays every word used in a title from <%= time_ago_in_words(@since) %> ago after filtering out common words.  
+		The larger the word, the more times it has been used.
+		<small>Common words ignored: <%= @blacklist.join(', ') %>.</small></blockquote>
+		
+		<div class="well" id="home_well">
+		<% @tags.each do |t| %>
+		 	<span class="feed_tag<%= (@counts[t.downcase].to_f/@counts.values.max * 5).to_i %>"><%= t -%></span>
+		<% end %>
+		</div>
+		
+		If all the tags look the same size, it means there's not much significant happening that's reported in many news feeds.
+	</div>
+	
+	
+	
+	<div class="span9 feed_loader" id="feed_content_container">	
+		<%= render :partial => '/feeds/feed_content' %>
+	</div>
+</div>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	  <title>Adam Gleeson</title>
+	  <%= stylesheet_link_tag    "application", :media => "all" %>
+	  <%= javascript_include_tag "application" %>
+	  <%= csrf_meta_tags %>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+	
+	<% flash.each do |name, msg| %>
+			<div class="alert alert-info" id="<%= "flash_#{name}" %>">
+			  <button type="button" class="close" data-dismiss="alert">&times;</button>
+			  <strong><%= name.to_s.humanize %></strong>: <%= msg if msg.is_a?(String) %>
+			</div>
+	<% end %>
+
+<%= yield %>
+
+
+
+<% if user_signed_in? %>
+  <% #link_to "My Profile", user_root_path%>
+  <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>  
+<%else%>
+	<%= link_to('Sign in', user_session_path) %>  
+	<%= link_to('Register', new_user_registration_path) %>  
+<% end %>
+
+</body>
+</html>

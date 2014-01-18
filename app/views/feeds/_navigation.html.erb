@@ -1,0 +1,24 @@
+<div class="row-fluid">
+
+		<div class="navigation btn-group left">		
+
+			<% if @user %>
+				<%= link_to "<i class='icon-th-list'></i> Feeds".html_safe, feeds_path, :class=>"btn loader #{'active' if !@blacklist and !@saved_items and !@subscriptions_page}", :id=>'back_to_feeds' %>		
+				<%= link_to "<i class='icon-pencil'></i> Subscriptions".html_safe, feeds_subscriptions_path, :class=>"btn loader #{'active' if @subscriptions_page}", :id=>'manage_subscriptions' %>
+				<%= link_to "<i class='icon-time'></i> Trending".html_safe, feeds_trending_path, :class=>"btn loader #{'active' if @blacklist and @user}", :id=>'view_trending' %>
+				<%= link_to "<i class='icon-star'></i> Saved items".html_safe, feeds_saved_path, :class=>"btn loader #{'active' if @saved_items}", :id=>'saved_items' %>
+			<% end %>
+			<div class="clear"></div>
+		</div>
+
+
+	<div id="display_options" class="left display_options<%= "_home" if !@user %>">
+		<div class="btn-group">
+			<button class="btn <%= "active" if @user and @user.feed_display_setting == "magazine" or (!@user or !@user.feed_display_setting) %>" id="display_magazine"><i class="icon-th-large"></i> </button>			
+			<button class="btn <%= "active" if @user and @user.feed_display_setting == "grid" %>" id="display_grid"><i class="icon-th"></i> </button>
+			<button class="btn <%= "active" if @user and @user.feed_display_setting == "list" %>" id="display_list"><i class="icon-align-justify"></i> </button>
+		</div>
+	</div>
+
+</div>
+

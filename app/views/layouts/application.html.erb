@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		
+	  <title>Feedable</title>
+	  <%= stylesheet_link_tag    "application", :media => "all" %>
+	  <%= javascript_include_tag "application" %>
+	  <%= csrf_meta_tags %>
+	  <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	  
+	  <link rel="icon" type="image/png" href="<%= asset_path 'feedable_32.png' %>">
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		
+		  ga('create', 'UA-44792552-1', 'feedable.co.uk');
+		  ga('send', 'pageview');
+		
+		</script>
+
+	</head>
+	<body>
+		
+       <div id="bg">
+            <div class="bg1 layer l_8"></div>
+            <div class="bg2 layer l_4"></div>
+            <div class="bg3 layer l_2"></div>
+        </div>
+        
+        <div id="banner_bg"></div>
+    	<div id="banner">
+    		
+    		
+        	<%= link_to "<img src='#{ asset_path 'feedable_32.png' }' id='feedable_icon'> <span id='title_text'><strong>Feed</strong>able</span>".html_safe, root_path, :id=>'title' %>
+
+			<%=  render :partial => 'feeds/navigation' %>
+    	</div>
+
+	    <div id="content_holder"  class="container-fluid">
+			<% flash.each do |name, msg| %>
+					<div class="alert alert-info" id="<%= "flash_#{name}" %>">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  <strong><%= name.to_s.humanize %></strong>: <%= msg if msg.is_a?(String) %>
+					</div>
+			<% end %>
+			
+			<div id="content"  class="row-fluid">
+				<%= yield %>
+			</div>
+		</div>
+		
+		<div id="user_options" class="btn-group">
+
+			
+			<% if user_signed_in? %>
+			  <% if current_user.id == 1 %>
+			  	<%= link_to('Admin', admin_path, :class=>"btn btn-info loader") %>
+			  <% end %>
+			
+			  <% #link_to "My Profile", user_root_path%>
+			  <%= link_to current_user.username, user_path(current_user), :class=>"btn loader" %>
+
+			  <%= link_to('Logout', destroy_user_session_path, :id => 'saveable', :method=>'delete', :class=>"btn loader") %>			  
+			<%else%>
+				<%= link_to('Sign in', user_session_path, :class=>"#{loader_type} btn") %>  
+				<%= link_to('Register', new_user_registration_path, :class=>"#{loader_type} btn" )%>  
+			<% end %>
+		</div>
+
+		<div id="loading"><div class="loading"></div></div>
+		
+<!-- Modal -->
+<div id="modal" class="modal hide fade" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div id="modal_content"></div>
+</div>
+					<%= link_to "<i class='icon-chevron-right'></i> View Subscriptions".html_safe, "#", :class=>'toggle_subscriptions', :id=>'show_subscriptions' if @user %>
+
+	</body>
+</html>

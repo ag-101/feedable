@@ -1,0 +1,20 @@
+<div class="row-fluid" id="main_container">
+	<%= render :partial => 'subscriptions'  %>
+
+	<div class="span9 feed_loader" id="feed_content_container">	
+		
+		<% unless params[:page]%>
+			<div id="parse_feeds">
+				<span class="update_text"><span class="number" title="New items found so far">0</span></span>
+				<div id="parsed_feed_names">Checking feeds...</div>
+				<div class="progress">
+				  <div class="bar" style="width: 0%;"></div>
+				</div>
+
+			</div>
+	
+			<%= link_to "New content available - click to reload", feeds_path, :class=>"btn block reload_feeds hidden loader btn-success", :id=>'parsed_feeds'%>
+		<% end %>
+		<%= render :partial => 'feed_content' %>
+	</div>
+</div>

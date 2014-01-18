@@ -1,0 +1,211 @@
+body, *{ margin:0; padding:0;  }
+body{ line-height:28px; text-align:justify; background:url(/assets/banner-tile.png) top repeat-x; font-family:helvetica, calibri, arial, sans-serif; font-size:12px; height:94%; line-height:28px; cursor:default; margin:0; padding:0; overflow-x:hidden; overflow-y:scroll;    color:#444;  } 
+
+a {
+  color: #0079af;
+  padding:2px;
+  text-decoration:none;
+  &:hover {
+    background: #0079af;
+    color:#fff;
+    text-decoration:none;
+  }
+}
+
+.clear{ clear:both; }
+.left{ float:left; }
+.right{ float:right; }
+
+.block {display:block; }
+
+.alert{margin:10px 0;}
+
+#content_holder{
+  position:relative;
+  z-index:3;
+  margin:auto;
+}
+
+#flash_message{
+  position: fixed;
+  width: 96%;
+  margin: 120px 1%;
+  top: 0;
+  z-index: 10000;
+  left: 0;
+  padding: 10px 1%;
+}
+
+.fancybox-close{ background: url('fancybox_sprite.png') !important; border:none !important; padding:0; }
+
+textarea{ height:100px; }
+
+input[type="checkbox"] { margin-left:0px; margin-right:10px; float:left; }
+
+#tooltip{
+  position:absolute;
+  background:url(/assets/75-transparent-black.png);
+  color:#efefef;
+  border:2px solid white;
+  border-radius:3px;
+  padding:20px;
+  z-index:100;
+  display:none;
+  width:150px;
+  margin-left:-95px;
+  margin-top:20px;
+  line-height:15px;
+  font-size:11px;
+}
+
+.field{ padding:10px; margin-bottom:10px; }
+
+
+#navigation a{ display:block; border:1px solid white; border-bottom:none; width:100%; padding:0; font-weight:bold; width:100%; text-align:center; padding:4px 0;  background:url(/assets/25-transparent-black.png); color:#fff;}
+#navigation a:hover{  background:url(/assets/50-transparent-white.png); }
+#navigation a.page_selected{ background:url(/assets/75-transparent-white.png); cursor:default; font-weight:bold; color:#666;  }
+
+.selected { font-weight:bold; }
+
+.title img{ padding:20px 10px;}
+.title:hover{ background:none; opacity:0.8; }
+
+#loading{ display:none; position:absolute; left:50%; margin-left:-90px; top:200px; z-index:100; width:160px; height:24px; padding:10px; background:url(/assets/50-transparent-white.png); border:1px solid white; }
+.loading{ width:160px; height:24px; background:url(/assets/loading.gif); }
+
+
+#footer a{
+  padding:10px;
+}
+
+h1{
+  padding:0; color:#666; 
+}
+
+h2{
+  padding:10px; color:#666; 
+}
+
+h3{
+  padding:10px; color:#666;
+}
+
+h4{
+  background:#0079af url(/assets/banner.png) center no-repeat;
+  color:#fff;
+  text-align:center;
+  font-size:12px;
+  line-height:28px;
+}
+
+
+
+a:hover{
+  -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+
+img{ max-width:100%; }
+
+#banner_bg{ background:url(/assets/banner.png) center top no-repeat; height:123px; margin:auto; position:absolute; top:0; z-index:1; left:50%; margin-left:-640px; }
+#banner{ height:106px; position:relative; z-index:3; padding:0 1%;  }
+
+#bg{  margin:auto; min-height:100%; width:100%; position:fixed; margin:0; overflow:hidden; top:0; left:0; z-index:2; background:transparent; -webkit-backface-visibility: hidden; -webkit-transform: translate3d(0,0,0); }
+
+.bg1, .bg2, .bg3, .bg4{ z-index:1; display:block; width:100%; height:100%; padding:50%; position:absolute; top:-100%; left:-50%; background-position:top; transform-style: preserve-3d; }
+.bg1{ background:url(/assets/grid2.png) transparent;}
+.bg2{ background:url(/assets/grid3.png) transparent;}
+.bg3{ background:url(/assets/grid4.png) transparent;}
+
+
+#title{ color:#fff; font-size:24px; line-height:58px; font-family: 'Jockey One', sans-serif; color:#efefef; }
+#title strong{ color:#fff; }
+
+#title:hover{ background:none; color:#fff; }
+
+#user_options{ position:absolute; top:58px; right:1%; text-align:left; z-index:100; color:#efefef; }
+#user_options ul{ list-style:none; display:block;  }
+#user_options li{ float:left; display:block; margin:5px; width:auto; }
+#user_options a{ font-size:11px; }
+
+#user_options .colour:hover{ color:#1099f7; }
+
+#fps{ font-size:11px; margin:3px; padding:3px; line-height:normal; border:1px solid #fff;} 
+.green{ background-color:#aaffaa; }
+.red{ background-color:#ffaaaa; }
+
+.admin a{ color:#ccc;}
+
+.btn-group{ display:block}
+
+.modal_exclusive{ display:none; }
+#modal .modal_exclusive{ display:inline; }
+#modal .modal_hidden{ display:none; }
+
+#modal form{ margin:0; }
+
+
+/* Large desktop */
+@media (min-width: 1200px) {  }
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) { 
+
+   }
+   
+/* Smaller than normal down */
+@media (max-width: 979px) { 
+  #thumb_images{ width:auto !important; clear:both; } 
+  #thumbnails .pagination{ position:relative !important; display:block; height:70px; }
+  #thumbnails_holder{ height:auto !important; }
+
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { 
+    #user_options{ top:13px; margin-right:3px; }
+    .blog_content{ padding:10px;}
+    #bg, #banner_bg{display:none; }
+    #banner{ height:auto; background:url(/assets/banner-mobile-tile.png) center; border-bottom:1px solid white; }
+    .home_item{ height:auto; }
+    .home_item_content{  padding-top:0; }
+
+    
+    #navigation a{ border-left:none; border-right:none; }
+    #tooltip{ visibility:hidden; display:none; height:0px; padding:0; width:0px;}
+    
+
+    #thumbnails #thumb_images a{ width:31% !important; margin:1%;     }
+    
+    input[type="submit"]{ width:98%; margin:1%; }
+    
+    a:hover{
+      -webkit-transition: all 0s ease;
+         -moz-transition: all 0s ease;
+           -o-transition: all 0s ease;
+          -ms-transition: all 0s ease;
+              transition: all 0s ease;
+    }
+    
+
+    
+    #thumb_images:hover a:hover, .thumbnail_image, #thumb_images:hover a, .thumbnail_image:hover, #photos .selected, .large_thumbnail img, .large_thumbnail:hover img, #home .thumbnail
+    {
+      opacity:1 !important;
+    }
+    
+  
+
+    body{ background:none !important; }
+    
+    #navigation{ display:none; }
+ }
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+      .caption{ position:relative !important; background:#000 url(/assets/shine-glossy-small.png) repeat-x top !important; }
+      .hidden-small-phone{ display:none; }
+   }

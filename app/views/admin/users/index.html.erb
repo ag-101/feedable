@@ -1,0 +1,29 @@
+<h1>Users</h1>
+<table class="table table-striped">
+ <thead>
+  <tr>
+    <th>ID</th>
+    <th>User</th>
+    <th>Roles</th>
+    <th>Created at</th>
+    <th>Last visit</th>
+    <th>This visit</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| -%>
+	    <tr>
+		    <td><%= user.id %></td>
+		    <td><%= link_to "#{user.username} (#{user.email})", edit_admin_user_path(user) %></td>
+		    <td><%= user.roles.map{|r| r.name}.join(", ") %></td>
+		    <td><%= user.created_at %></td>
+		    <td><%= user.last_visit %></td>
+		    <td><%= user.this_visit %></td>
+		    <td><%= link_to "Destroy", admin_user_path(user), :class=>"btn", :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %></td>
+	    </tr>
+    <% end -%>
+   </tbody>
+</table>
+
+<%= link_to "New", new_admin_user_path, :class => 'btn btn-primary' %>

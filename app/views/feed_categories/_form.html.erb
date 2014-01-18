@@ -1,0 +1,52 @@
+<%= form_for(@feed_category, :html => {:class=>"form-horizontal"}) do |f| %>
+<div class="modal-body">  
+  <% if @feed_category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@feed_category.errors.count, "error") %> prohibited this Feed Category from being saved:</h2>
+
+      <ul>
+      <% @feed_category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field control-group">
+  	<%= f.label :name, :class=>"control-label" %>
+  	<div class="controls">
+  		<%= f.text_field :name, :placeholder=>"Feed Category Title" %>
+  	</div>
+  </div>
+  
+
+  <div class="field control-group">
+  	<%= f.label :image, :class=>"control-label" %>
+  	<div class="controls">
+  		<%= f.text_field :image, :placeholder=>"http://" %>
+  	</div>
+  </div>
+  
+  <div class="field control-group">
+  	<%= f.label :colour, :class=>"control-label" %>
+  	<div class="controls">
+  		<%= f.text_field :colour, :placeholder=>"Colour" %>
+  	</div>
+  </div>
+  
+</div>
+
+  <div class="modal-footer">
+	  <div class="actions controls">
+		<%= link_to 'Cancel', @feed_category, :class=>"loader modal_hidden btn modal_hidden" %>
+		<button class="btn modal_exclusive" data-dismiss="modal" aria-hidden="true">Cancel</button>
+	  	
+		<%= link_to "Delete", feed_category_path(@feed_category), :method => :delete, :class=>"btn btn-danger", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" if !f.object.new_record?  %>
+		
+
+	  	
+	    <%= f.submit "Save", :class=>"btn btn-primary" %>
+	  </div>
+  </div>
+  
+<% end %>

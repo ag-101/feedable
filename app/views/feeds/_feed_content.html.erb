@@ -1,0 +1,27 @@
+<div id="feed_content" class="<%= @user ? @user.feed_display_setting : 'magazine' %>">	
+	<div class="row-fluid">	
+		<div class="span12">
+			<% if @user %><h3><%if @page_title %><%= @page_title %><% else %><% if @this_feed %><%= @this_feed.name %><% else %>Latest<% end %><% end %></h3><% end %>
+
+		</div>
+	</div>
+	<div class="row-fluid" id="last_checked">
+		<%= "Last checked for updates #{time_ago_in_words(@this_feed.updated_at)} ago <strong>#{@this_feed.last_updated || 0} new items found</strong>".html_safe if @this_feed and !params[:cat] %>
+	</div>
+	
+	<% if @feed_content.count == 0 %>
+		<% if @saved_items %>
+			<h4>You have no saved items</h4>
+			<i class="icon-star"></i> Add saved items by clicking the star icon on a news article once you have expanded it.
+		<% else %>
+			<h4>No items!</h4>
+			<%= "This page will display your history when you have clicked the 'Read' button on articles." if @history %>
+			<%= "Add content by managing your subscriptions." unless @history %>
+			<%= link_to "<i class='icon-pencil'></i> Edit Subscriptions".html_safe, feeds_subscriptions_path, :class=>'btn block loader' unless @history %>
+		<% end %>
+	<% else %>	
+		<div id="main_content">
+			<%= render :partial => '/feeds/content' %>
+		</div>
+	<% end%>
+</div>

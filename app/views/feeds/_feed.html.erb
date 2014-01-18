@@ -1,0 +1,17 @@
+<% feed = @feed if @feed
+
+	subscribed = false
+	if feed.user.include?(current_user)
+		subscribed = true
+	end 
+%>
+
+<div id="feed_<%= feed.id%>" class="feed <%= 'un' if !subscribed %>subscribed">
+	<%= link_to feed.name, feed_subscribe_path(feed.id), :style=>"background-color:#{feed.feed_category.colour};", :class=>"subscribe_toggle" %>
+
+	<div class="btn-group">
+	  <button type="button" class="btn btn-mini <%= 'btn-primary' if subscribed %>">On</button>
+	  <button type="button" class="btn btn-mini <%= 'btn-primary' if not subscribed %>">Off</button>
+	</div>
+
+</div>

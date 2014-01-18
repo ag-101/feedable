@@ -1,0 +1,74 @@
+<%= form_for(@feed, :html => {:class=>"form-horizontal"}) do |f| %>
+<div class="modal-body">  
+  <% if @feed.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@feed.errors.count, "error") %> prohibited this feed from being saved:</h2>
+
+      <ul>
+      <% @feed.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field control-group">
+  	<%= f.label :name, :class=>"control-label" %>
+  	<div class="controls">
+  		<%= f.text_field :name, :placeholder=>"Feed Title" %>
+  	</div>
+  </div>
+  
+  <div class="field control-group">
+  	<%= f.label :feed_type, :class=>"control-label" %>
+  	<div class="controls">
+  		<% options_for_select = [['', ''], ['RSS', 'rss'], ['Podcast', 'podcast'], ['Twitter timeline', 'twitter_timeline']]%>
+  		<%= f.select(:feed_type, options_for_select) %>
+  	</div>
+  </div>
+  
+  <div class="field control-group hidden" id="form_twitter_username">
+  	<label class="control-label" for="twitter_username">Twitter username</label>
+  	<div class="controls">
+  		<%= text_field_tag :twitter_username, "", :placeholder=>"@" %>
+  	</div>
+  </div>
+  
+  <div class="field control-group <%= 'hidden' unless @feed.errors.any? %>" id="form_url">
+  	<%= f.label :url, :class=>"control-label" %>
+  	<div class="controls">
+  		<%= f.text_field :url, :placeholder=>"http://" %>
+  	</div>
+  </div>
+
+  <div class="field control-group">
+  	<%= f.label :feed_category_id, :class=>"control-label" %>
+  	<div class="controls">
+  		<%= collection_select :feed, :feed_category_id, FeedCategory.find(:all), :id, :name, :class=>"input-xxlarge" %> 
+  	</div>
+  </div> 
+  
+  <div class="field control-group">
+  	<%= f.label :private, :class=>"control-label" %>
+  	<div class="controls">
+  		<%= f.check_box :private %>
+  	</div>
+  </div>
+  
+
+</div>
+
+  <div class="modal-footer">
+	  <div class="actions controls">
+		<%= link_to 'Cancel', feeds_subscriptions_path, :class=>"loader modal_hidden btn modal_hidden" %>
+		<button class="btn modal_exclusive" data-dismiss="modal" aria-hidden="true">Cancel</button>
+	  	
+		<%= link_to "Delete", feed_path(@feed), :method => :delete, :class=>"btn btn-danger", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" if !f.object.new_record?  %>
+		
+
+	  	
+	    <%= f.submit "Save", :class=>"btn btn-primary" %>
+	  </div>
+  </div>
+  
+<% end %>
