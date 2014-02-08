@@ -5,7 +5,7 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+gem 'mysql2', '0.3.11'
 
 
 # Gems used only for assets and not required
@@ -39,10 +39,10 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
-gem "browser"
+#gem "browser"
 gem "cocaine", "0.3.2"
 gem "kaminari"  
-gem "devise"
+gem "devise", '2.2.2'
 gem "cancan"
 gem "paperclip", "2.7"
 gem "feedzirra"
