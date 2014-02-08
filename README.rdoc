@@ -9,10 +9,10 @@ It's no longer hosted on a server anywhere, but you can either grab the files an
 None of the links on there work, but you can have a look at how opening the previews of articles work, and also view the presentation options.  It's using responsive Bootstrap framework to also give it a mobile view.
 
 
-{Normal screenshot}[_demo/feedable-normal.png]
+{Normal screenshot}[https://raw.github.com/ag-101/feedable/master/_demo/feedable-normal.png]
 
-{Mobile screenshot}[_demo/feedable-mobile.png]
+{Mobile screenshot}[https://raw.github.com/ag-101/feedable/master/_demo/feedable-mobile.png]
 
-{Saved}[_demo/feedable-saved.png]
+{Saved}[https://raw.github.com/ag-101/feedable/master/_demo/feedable-saved.png]
 
-{Subscriptions}[_demo/feedable-subscriptions.png]
+{Subscriptions}[https://raw.github.com/ag-101/feedable/master/_demo/feedable-subscriptions.png]
