@@ -1,4 +1,4 @@
-== Feedable
+= Feedable
 
 Feedable is an RSS reader, created when Google Reader shut down.  It allows users to register and select feeds from a pool, or add their own feeds (which can optionally be added to the pool for other to use).
 
@@ -8,11 +8,11 @@ It's no longer hosted on a server anywhere, but you can either grab the files an
 
 None of the links on there work, but you can have a look at how opening the previews of articles work, and also view the presentation options.  It's using responsive Bootstrap framework to also give it a mobile view.
 
+=== Screenshots
+{Normal}[https://raw.github.com/ag-101/feedable/master/_demo/feedable-normal.png]
 
-![Normal screenshot](https://raw.github.com/ag-101/feedable/master/_demo/feedable-normal.png)
+{Mobile}[https://raw.github.com/ag-101/feedable/master/_demo/feedable-mobile.png]
 
-![Mobile screenshot](https://raw.github.com/ag-101/feedable/master/_demo/feedable-mobile.png)
+{Saved}[https://raw.github.com/ag-101/feedable/master/_demo/feedable-saved.png]
 
-![Saved](https://raw.github.com/ag-101/feedable/master/_demo/feedable-saved.png)
-
-![Subscriptions])https://raw.github.com/ag-101/feedable/master/_demo/feedable-subscriptions.png)
+{Subscriptions}[https://raw.github.com/ag-101/feedable/master/_demo/feedable-subscriptions.png]
