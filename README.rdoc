@@ -6,7 +6,7 @@ It's no longer hosted on a server anywhere, but you can either grab the files an
 
 {Demo}[https://github.com/ag-101/feedable/blob/master/_demo/feedable-demo.zip]
 
-None of the links on there work, but you can have a look at how opening the previews of articles work, and also view the presentation options.  It's using responsive Bootstrap framework to also give it a mobile view.
+None of the links in the demo will work, but you can have a look at how opening the previews of articles work, and also view the presentation options.  It's using responsive Bootstrap framework to also give it a mobile view.
 
 === Screenshots
 {Normal}[https://raw.github.com/ag-101/feedable/master/_demo/feedable-normal.png]
