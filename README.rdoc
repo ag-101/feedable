@@ -2,7 +2,7 @@
 
 Feedable is an RSS reader, created when Google Reader shut down.  It allows users to register and select feeds from a pool, or add their own feeds (which can optionally be added to the pool for other to use).
 
-It's no longer hosted on a server anywhere, but you can either grab the files an run it yourself, or view a cut-down HTML sample to demo the interface here:
+It's no longer hosted on a server anywhere, but you can either grab the files an run it yourself (the Gemfile might need some tinkering depending on your platform), or view a cut-down HTML sample to demo the interface here:
 
 {Demo}[https://github.com/ag-101/feedable/blob/master/_demo/feedable-demo.zip]
 
